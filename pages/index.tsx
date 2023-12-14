@@ -27,7 +27,7 @@ export default function Home() {
           </button>
           <div>
             <h5 className='text-lg font-bold text-white'>Hai, Pengunjung!</h5>
-            <p className='text-white' >Akses semua fitur yuk~</p>
+            <p className='text-white text-sm' >Akses semua fitur yuk~</p>
           </div>
           <button className='bg-white p-2 rounded-sm ml-4 w-1/3'>
             Masuk
