@@ -1,118 +1,132 @@
+import Input from '@/components/Input'
+import React, { useEffect, useState } from 'react'
+import { BellIcon, BookmarkIcon, BuildingStorefrontIcon, EnvelopeIcon, HomeIcon, ListBulletIcon, ShoppingBagIcon, UserCircleIcon, UserIcon } from '@heroicons/react/24/outline'
+import Header from '@/components/Header'
+import { useRouter } from 'next/router'
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+import dynamic from 'next/dynamic'
+import { baby_cloth, gadget, healthy_foods, makeup_kit, medical_kit, men_cloth, mom_baby, skin_beauty, watch, women_cloth } from '@/assets'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+const OwlCarousel = dynamic(import("react-owl-carousel"), { ssr: false })
 
 export default function Home() {
+  const router = useRouter();
+  const [show, setShow] = useState<boolean>(false)
+
+  useEffect(() => {
+    setShow(true)
+  }, [])
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <div className='bg-[#006738] w-full h-[160px] p-4'>
+        <Header />
+        <div className='flex gap-2 items-center w-full'>
+          <button>
+            <UserCircleIcon className='text-white w-10' />
+          </button>
+          <div>
+            <h5 className='text-lg font-bold text-white'>Hai, Pengunjung!</h5>
+            <p className='text-white' >Akses semua fitur yuk~</p>
+          </div>
+          <button className='bg-white p-2 rounded-sm ml-4 w-1/3'>
+            Masuk
+          </button>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className='bg-white w-full h-auto p-4 rounded-3xl -mt-5'>
+        <div className='mt-2'>
+          {
+            show ?
+              <OwlCarousel autoplay className="owl-theme" loop margin={1} responsive={{ 0: { items: 1, margin: 5 }, 768: { items: 2, margin: 10 }, 1024: { items: 3, margin: 20 } }}>
+                <div className='item'>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
+                    alt="items" className='w-full h-[150px]' />
+                </div>
+                <div className='item'>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
+                    alt="items" className='w-full h-[150px]' />
+                </div>
+                <div className='item'>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
+                    alt="items" className='w-full h-[150px]' />
+                </div>
+              </OwlCarousel> : ""
+          }
+        </div>
+        <div className='bg-white shadow-lg mt-2 p-2 rounded-md flex flex-col justify-center items-center'>
+          <div className='flex justify-center gap-2 items-center'>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={men_cloth} alt="icon-nav" width={35} height={35} />
+              Fashion Pria
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={women_cloth} alt="icon-nav" width={35} height={35} />
+              Busana Wanita
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={makeup_kit} alt="icon-nav" width={35} height={35} />
+              Perhiasan Aksesoris
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={gadget} alt="icon-nav" width={35} height={35} />
+              Produk Elektronik
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={baby_cloth} alt="icon-nav" width={35} height={35} />
+              Pakaian Bayi
+            </button>
+          </div>
+
+          <div className='flex justify-center gap-2 items-center mt-4'>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={medical_kit} alt="icon-nav" width={35} height={35} />
+              Kesehatan
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={mom_baby} alt="icon-nav" width={35} height={35} />
+              Ibu dan Bayi
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={skin_beauty} alt="icon-nav" width={35} height={35} />
+              Salon Kecantikan
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={watch} alt="icon-nav" width={35} height={35} />
+              Jam Tangan
+            </button>
+            <button className='flex flex-col justify-center items-center text-xs'>
+              <Image src={healthy_foods} alt="icon-nav" width={35} height={35} />
+              Makanan Sehat
+            </button>
+          </div>
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white text-black border flex justify-between items-center">
+        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
+          <HomeIcon className='text-black w-7' />
+          Beranda
+        </button>
+        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
+          <ListBulletIcon className='text-black w-7' />
+          Menu
+        </button>
+        <button type='button' className='flex flex-col justify-center items-center text-[#006738]' onClick={() => { router.push("/") }}>
+          <div className='bg-[#006738] flex justify-center items-center rounded-full w-14 h-14 -mt-10'>
+            <BuildingStorefrontIcon className='text-white w-7' />
+          </div>
+          Mall
+        </button>
+        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
+          <BookmarkIcon className='text-black w-7' />
+          Riwayat
+        </button>
+        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
+          <UserIcon className='text-black w-7' />
+          Profil
+        </button>
       </div>
-    </main>
+    </div>
   )
 }
