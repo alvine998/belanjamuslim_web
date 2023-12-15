@@ -43,15 +43,15 @@ export default function Home() {
                 <OwlCarousel autoplay className="owl-theme" loop margin={1} responsive={{ 0: { items: 1, margin: 5 }, 768: { items: 2, margin: 10 }, 1024: { items: 3, margin: 20 } }}>
                   <div className='item'>
                     <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
-                      alt="items" className='w-full h-[150px]' />
+                      alt="items" className='w-full h-[150px] rounded-lg' />
                   </div>
                   <div className='item'>
                     <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
-                      alt="items" className='w-full h-[150px]' />
+                      alt="items" className='w-full h-[150px] rounded-lg' />
                   </div>
                   <div className='item'>
                     <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-14%20at%2017.03.03.jpeg?alt=media&token=361ab48c-73f9-4673-94fa-027a2c046d7b"
-                      alt="items" className='w-full h-[150px]' />
+                      alt="items" className='w-full h-[150px] rounded-lg' />
                   </div>
                 </OwlCarousel> : ""
             }
