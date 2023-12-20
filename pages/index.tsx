@@ -1,6 +1,6 @@
 import Input from '@/components/Input'
 import React, { useEffect, useState } from 'react'
-import { BellIcon, BookmarkIcon, BuildingStorefrontIcon, EnvelopeIcon, HandThumbUpIcon, HomeIcon, ListBulletIcon, ShoppingBagIcon, UserCircleIcon, UserIcon } from '@heroicons/react/24/outline'
+import { BellIcon, BookmarkIcon, BuildingStorefrontIcon, ChevronLeftIcon, EnvelopeIcon, HandThumbUpIcon, HomeIcon, ListBulletIcon, ShoppingBagIcon, UserCircleIcon, UserIcon } from '@heroicons/react/24/outline'
 import Header from '@/components/Header'
 import { useRouter } from 'next/router'
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -9,12 +9,16 @@ import dynamic from 'next/dynamic'
 import { baby_cloth, gadget, healthy_foods, makeup_kit, medical_kit, men_cloth, mom_baby, skin_beauty, watch, women_cloth } from '@/assets'
 import Image from 'next/image'
 import ProductBox from '@/components/ProductBox'
+import BottomTab from '@/components/BottomTab'
+import { Transition } from '@headlessui/react'
+import Slider from '@/components/Slider'
 const OwlCarousel = dynamic(import("react-owl-carousel"), { ssr: false })
 
 export default function Home() {
   const router = useRouter();
   const [show, setShow] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const [isSliding, setIsSliding] = useState<any>({ open: false, key: '', data: null })
 
   useEffect(() => {
     setShow(true)
@@ -29,9 +33,10 @@ export default function Home() {
   }, [])
   return (
     <div>
+      <Slider isSliding={isSliding} setIsSliding={setIsSliding} />
       <div className={`bg-[#006738] w-full h-[160px] ${isScrolled ? 'p-0 duration-200 transition-all' : 'p-4'}`}>
         <div className={isScrolled ? 'fixed top-0 bg-[#006738] w-full h-[70px] p-2 duration-200 transition-all z-50' : ''}>
-          <Header />
+          <Header setOpen={setIsSliding} />
         </div>
         <div className='flex gap-2 items-center w-full'>
           <button>
@@ -41,7 +46,7 @@ export default function Home() {
             <h5 className='text-lg font-bold text-white'>Hai, Pengunjung!</h5>
             <p className='text-white text-sm' >Akses semua fitur yuk~</p>
           </div>
-          <button className='bg-white p-2 rounded-sm ml-4 w-1/3'>
+          <button onClick={() => { setIsSliding({ ...isSliding, open: true }) }} className='bg-white p-2 rounded-sm ml-4 w-1/3'>
             Masuk
           </button>
         </div>
@@ -177,29 +182,8 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="fixed bottom-0 left-0 right-0 p-4 z-50 bg-white text-black border flex justify-between items-center">
-        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
-          <HomeIcon className='text-black w-7' />
-          Beranda
-        </button>
-        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
-          <ListBulletIcon className='text-black w-7' />
-          Menu
-        </button>
-        <button type='button' className='flex flex-col justify-center items-center text-[#006738]' onClick={() => { router.push("/") }}>
-          <div className='bg-[#006738] flex justify-center items-center rounded-full w-14 h-14 -mt-10'>
-            <BuildingStorefrontIcon className='text-white w-7' />
-          </div>
-          Mall
-        </button>
-        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
-          <BookmarkIcon className='text-black w-7' />
-          Riwayat
-        </button>
-        <button type='button' className='flex flex-col justify-center items-center' onClick={() => { router.push("/") }}>
-          <UserIcon className='text-black w-7' />
-          Profil
-        </button>
+      <div>
+        <BottomTab />
       </div>
     </div>
   )

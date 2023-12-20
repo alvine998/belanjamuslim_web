@@ -10,20 +10,22 @@ import { baby_cloth, gadget, healthy_foods, makeup_kit, medical_kit, men_cloth, 
 import Image from 'next/image'
 import ProductBox from '@/components/ProductBox'
 import BottomTab from '@/components/BottomTab'
+import Slider from '@/components/Slider'
 const OwlCarousel = dynamic(import("react-owl-carousel"), { ssr: false })
 
 export default function Home() {
     const router = useRouter();
     const [show, setShow] = useState<boolean>(false)
-    const [isScrolled, setIsScrolled] = useState<boolean>(false)
+    const [isSliding, setIsSliding] = useState<any>({ open: false, key: '', data: null })
 
     useEffect(() => {
         setShow(true)
     }, [])
     return (
         <div>
+            <Slider isSliding={isSliding} setIsSliding={setIsSliding} />
             <div className={'fixed top-0 bg-[#006738] w-full h-[70px] p-2 duration-200 transition-all z-50'}>
-                <Header />
+                <Header setOpen={setIsSliding} />
             </div>
 
             <div className='mt-20'>
