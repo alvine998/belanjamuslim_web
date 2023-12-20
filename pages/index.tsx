@@ -8,19 +8,31 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import dynamic from 'next/dynamic'
 import { baby_cloth, gadget, healthy_foods, makeup_kit, medical_kit, men_cloth, mom_baby, skin_beauty, watch, women_cloth } from '@/assets'
 import Image from 'next/image'
+import ProductBox from '@/components/ProductBox'
 const OwlCarousel = dynamic(import("react-owl-carousel"), { ssr: false })
 
 export default function Home() {
   const router = useRouter();
   const [show, setShow] = useState<boolean>(false)
+  const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   useEffect(() => {
     setShow(true)
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
   return (
     <div>
-      <div className='bg-[#006738] w-full h-[160px] p-4'>
-        <Header />
+      <div className={`bg-[#006738] w-full h-[160px] ${isScrolled ? 'p-0 duration-200 transition-all' : 'p-4'}`}>
+        <div className={isScrolled ? 'fixed top-0 bg-[#006738] w-full h-[70px] p-2 duration-200 transition-all z-50' : ''}>
+          <Header />
+        </div>
         <div className='flex gap-2 items-center w-full'>
           <button>
             <UserCircleIcon className='text-white w-10' />
@@ -58,46 +70,46 @@ export default function Home() {
           </div>
           <div className='bg-white shadow-lg mt-2 p-2 rounded-md flex flex-col justify-center items-center'>
             <div className='flex justify-center gap-2 items-center'>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/fashion-pria') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={men_cloth} alt="icon-nav" width={35} height={35} />
                 Fashion Pria
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/busana-wanita') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={women_cloth} alt="icon-nav" width={35} height={35} />
                 Busana Wanita
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/perhiasan-aksesoris') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={makeup_kit} alt="icon-nav" width={35} height={35} />
                 Perhiasan Aksesoris
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/produk-elektronik') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={gadget} alt="icon-nav" width={35} height={35} />
                 Produk Elektronik
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/pakaian-bayi') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={baby_cloth} alt="icon-nav" width={35} height={35} />
                 Pakaian Bayi
               </button>
             </div>
 
             <div className='flex justify-center gap-2 items-center mt-4'>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/kesehatan') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={medical_kit} alt="icon-nav" width={35} height={35} />
                 Kesehatan
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/ibu-dan-bayi') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={mom_baby} alt="icon-nav" width={35} height={35} />
                 Ibu dan Bayi
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/salon-kecantikan') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={skin_beauty} alt="icon-nav" width={35} height={35} />
                 Salon Kecantikan
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/jam-tangan') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={watch} alt="icon-nav" width={35} height={35} />
                 Jam Tangan
               </button>
-              <button className='flex flex-col justify-center items-center text-xs'>
+              <button onClick={() => { router.push('product/category/makanan-sehat') }} className='flex flex-col justify-center items-center text-xs'>
                 <Image src={healthy_foods} alt="icon-nav" width={35} height={35} />
                 Makanan Sehat
               </button>
@@ -124,30 +136,15 @@ export default function Home() {
             {
               show ?
                 <OwlCarousel autoplay className="owl-theme" dots={false} loop margin={1} responsive={{ 0: { items: 2, margin: 5 }, 768: { items: 4, margin: 10 }, 1024: { items: 6, margin: 20 } }}>
-                  <div className='item relative'>
-                    <img src="https://ae01.alicdn.com/kf/He6ea7b97870346c6aac2f85e26c51943r.jpg_640x640Q90.jpg_.webp"
-                      alt="items" className='w-[150px] h-[150px] rounded-lg' />
-                    <div className='bg-[#006738] w-[40px] h-[40px] rounded-lg top-0 right-0 absolute flex justify-center items-center'>
-                      <p className='text-white font-semibold'>10%</p>
-                    </div>
-                    <div>
-                      <h5>Sanda M-01 Pro</h5>
-                      <h5 className=''>
-                        <strong className='line-through'>Rp 250.000</strong><br /><strong className='text-red-500'>Rp 150.000</strong>
-                      </h5>
-                      <div className='bg-red-700 w-full p-1 my-1 flex justify-center items-center rounded-full'>
-                        <p className='text-white text-sm'>Terjual 10</p>
-                      </div>
-                    </div>
-                    <div>
-                      <button className='bg-orange-500 w-full h-[30px] mt-2 text-white rounded-lg'>
-                        Beli Sekarang
-                      </button>
-                      <button className='bg-green-700 w-full text-sm h-[30px] mt-1 text-white rounded-lg'>
-                        Simpan Keranjang
-                      </button>
-                    </div>
-                  </div>
+                  <ProductBox
+                    name='Sanda M-01 Pro'
+                    image='https://ae01.alicdn.com/kf/He6ea7b97870346c6aac2f85e26c51943r.jpg_640x640Q90.jpg_.webp'
+                    price={250000}
+                    sold={25}
+                    mark='flash_sale'
+                    discount={10}
+                    seller='Yoou'
+                  />
                 </OwlCarousel> : ""
             }
           </div>
@@ -160,28 +157,14 @@ export default function Home() {
             {
               show ?
                 <OwlCarousel autoplay className="owl-theme" dots={false} loop margin={1} responsive={{ 0: { items: 2, margin: 5 }, 768: { items: 4, margin: 10 }, 1024: { items: 6, margin: 20 } }}>
-                  <div className='item relative'>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-13%20at%2016.47.45.jpeg?alt=media&token=c4a105a3-8c9e-44e1-ba71-258efaafd384"
-                      alt="items" className='w-[150px] h-[150px] rounded-lg' />
-                    <div className='bg-[#006738] w-[40px] h-[40px] rounded-lg top-0 right-0 absolute flex justify-center items-center'>
-                      <HandThumbUpIcon className='text-white w-7' />
-                    </div>
-                    <div>
-                      <h5 className='text-xs'>Malino Series Dhiyaa Hand Soap</h5>
-                      <h5 className=''>
-                        <strong>Rp 39.000</strong>
-                      </h5>
-                      <h5 className='text-xs'>Terjual 1.2 rb</h5>
-                    </div>
-                    <div>
-                      <button className='bg-orange-500 w-full h-[30px] mt-2 text-white rounded-lg'>
-                        Beli Sekarang
-                      </button>
-                      <button className='bg-green-700 w-full text-sm h-[30px] mt-1 text-white rounded-lg'>
-                        Simpan Keranjang
-                      </button>
-                    </div>
-                  </div>
+                  <ProductBox
+                    mark='recommended'
+                    image='https://firebasestorage.googleapis.com/v0/b/basicchat-c83b5.appspot.com/o/WhatsApp%20Image%202023-12-13%20at%2016.47.45.jpeg?alt=media&token=c4a105a3-8c9e-44e1-ba71-258efaafd384'
+                    name='Malino Series Dhiyaa Hand Soap'
+                    price={39000}
+                    sold={10}
+                    seller='Paradigma'
+                  />
                 </OwlCarousel> : ""
             }
           </div>
