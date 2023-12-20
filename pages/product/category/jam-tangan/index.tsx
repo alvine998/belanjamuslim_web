@@ -24,7 +24,7 @@ export default function Home() {
     return (
         <div>
             <Slider isSliding={isSliding} setIsSliding={setIsSliding} />
-            <div className={'fixed top-0 bg-[#006738] w-full h-[70px] p-2 duration-200 transition-all z-50'}>
+            <div className={`bg-[#006738] w-full h-[70px] p-2 duration-200 transition-all ${isSliding?.open ? '' : 'fixed top-0 z-50'}`}>
                 <Header setOpen={setIsSliding} />
             </div>
 
